@@ -8,14 +8,10 @@ import shutil
 import os.path
 import tempfile
 
-import subprocess
-import sh  # TODO: remove
+import sh
 
 from string import Template
 from multiprocessing import Process
-
-from storage import zconf
-from storage import settings
 
 
 # Variables ===================================================================
@@ -24,20 +20,28 @@ TMP_DIR = None
 
 
 # Functions & classes =========================================================
-def data_context(fn, mode="r"):
-    path = os.path.join(os.path.dirname(__file__), "data")
+def data_context_name(fn):
+    return os.path.join(os.path.dirname(__file__), "data", fn)
 
-    with open(os.path.join(path, fn), mode) as f:
+
+def data_context(fn, mode="r"):
+    with open(data_context_name(fn), mode) as f:
         return f.read()
 
 
+def tmp_context_name(fn):
+    return os.path.join(TMP_DIR, fn)
+
+
+def tmp_context(fn, mode="r"):
+    with open(tmp_context_name(fn), mode) as f:
+        return f.read()
+
+
+# Environment generators ======================================================
 def generate_environment():
     global TMP_DIR
     TMP_DIR = tempfile.mkdtemp()
-
-    # monkey patch the paths
-    settings.ZCONF_PATH = TMP_DIR
-    zconf.ZCONF_PATH = TMP_DIR
 
     # write ZEO server config to  temp directory
     zeo_conf_path = os.path.join(TMP_DIR, "zeo.conf")
@@ -48,12 +52,12 @@ def generate_environment():
 
     # write client config to temp directory
     client_config_path = os.path.join(TMP_DIR, "zeo_client.conf")
-    with open(client_config_path, "w") as f:
-        f.write(data_context("zeo_client.conf"))
+    shutil.copy(data_context_name("zeo_client.conf"), client_config_path)
 
     # run the ZEO server
     def run_zeo():
-        # subprocess.check_call("runzeo -C " + zeo_conf_path, shell=True)
+        # sh terminates when .terminate() is called, suprocess and os.system()
+        # doesn't
         sh.runzeo(C=zeo_conf_path)
 
     global SERV
