@@ -1,4 +1,4 @@
 #! /usr/bin/env sh
-export PYTHONPATH="src/edeposit/amqp:$PYTHONPATH"
+export PYTHONPATH="src:$PYTHONPATH"
 
 py.test tests $@

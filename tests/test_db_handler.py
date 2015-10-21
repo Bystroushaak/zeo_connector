@@ -8,8 +8,8 @@ import pytest
 
 import transaction
 
-from rest.db_handler import ZEOWrapper
-from rest.db_handler import ZEOConfWrapper
+from zeo_connector import ZEOWrapper
+from zeo_connector import ZEOConfWrapper
 
 import environment_generator
 
