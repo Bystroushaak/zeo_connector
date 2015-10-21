@@ -18,17 +18,17 @@ long_description = "\n\n".join([
 
 # Actual setup definition =====================================================
 setup(
-    name='edeposit.amqp.rest',
+    name='zeo_connector',
     version=getVersion(changelog),
-    description="REST API to access Edeposit website.",
+    description="Class which makes connections to ZEO a bit nicer.",
     long_description=long_description,
-    url='https://github.com/edeposit/edeposit.amqp.rest/',
+    url='https://github.com/Bystroushaak/zeo_connector',
 
-    author='Edeposit team',
-    author_email='edeposit@email.cz',
+    author='Bystroushaak',
+    author_email='bystrousak@kitakitsune.org',
 
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
 
         "Programming Language :: Python :: 2",
@@ -40,11 +40,9 @@ setup(
 
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    namespace_packages=['edeposit', 'edeposit.amqp'],
 
     scripts=[
         # 'bin/edeposit_storage_runzeo.sh',
-        # 'bin/edeposit_storage_server.py',
     ],
 
     zip_safe=False,
@@ -56,7 +54,6 @@ setup(
     extras_require={
         "test": [
             "pytest",
-            # "fake-factory"
         ],
         "docs": [
             "sphinx",
