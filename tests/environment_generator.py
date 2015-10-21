@@ -8,10 +8,9 @@ import shutil
 import os.path
 import tempfile
 
-import sh
-
 from string import Template
-from multiprocessing import Process
+import threading
+import subprocess
 
 
 # Variables ===================================================================
@@ -56,13 +55,12 @@ def generate_environment():
 
     # run the ZEO server
     def run_zeo():
-        # sh terminates when .terminate() is called, suprocess and os.system()
-        # doesn't
-        sh.runzeo(C=zeo_conf_path)
+        global SERV
+        SERV = subprocess.Popen(["runzeo", "-C", zeo_conf_path])
 
-    global SERV
-    SERV = Process(target=run_zeo)
-    SERV.start()
+    serv = threading.Thread(target=run_zeo)
+    serv.setDaemon(True)
+    serv.start()
 
 
 def cleanup_environment():
