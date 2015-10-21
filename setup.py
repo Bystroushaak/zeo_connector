@@ -20,7 +20,7 @@ long_description = "\n\n".join([
 setup(
     name='zeo_connector',
     version=getVersion(changelog),
-    description="Class which makes connections to ZEO a bit nicer.",
+    description="Wrappers, which make working with ZEO little bit nicer.",
     long_description=long_description,
     url='https://github.com/Bystroushaak/zeo_connector',
 
