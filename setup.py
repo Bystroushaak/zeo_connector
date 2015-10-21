@@ -4,8 +4,8 @@
 # Interpreter version: python 2.7
 #
 # Imports =====================================================================
-from setuptools import setup, find_packages
-from docs import getVersion
+from setuptools import setup
+from setuptools import find_packages
 
 
 # Variables ===================================================================
@@ -14,6 +14,27 @@ long_description = "\n\n".join([
     open('README.rst').read(),
     changelog
 ])
+
+
+# Functions ===================================================================
+def allSame(s):
+    return not any(filter(lambda x: x != s[0], s))
+
+
+def hasDigit(s):
+    return any(char.isdigit() for char in s)
+
+
+def getVersion(data):
+    """
+    Parse version from changelog written in RST format.
+    """
+    data = data.splitlines()
+    return next((
+        v
+        for v, u in zip(data, data[1:])  # v = version, u = underline
+        if len(v) == len(u) and allSame(u) and hasDigit(v) and "." in v
+    ))
 
 
 # Actual setup definition =====================================================
