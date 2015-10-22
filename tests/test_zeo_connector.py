@@ -81,3 +81,39 @@ def test_zeo_wrapper_storing(zeo_wrapper):
 def test_zeo_wrapper_retreiving_again(zeo_wrapper):
     with transaction.manager:
         assert zeo_wrapper["zeo"] == "hello ZEO"
+
+
+def test_dict_methods(zeo_wrapper, zeo_conf_wrapper):
+    with transaction.manager:
+        zeo_wrapper["first"] = 1
+
+    used = {
+        "something": "hello",
+        "azgabash": "hello",
+        "zeo": "hello ZEO",
+        "first": 1,
+    }
+
+    with transaction.manager:
+        assert "first" in zeo_conf_wrapper
+        assert zeo_conf_wrapper.get("first", None) == 1
+        assert zeo_conf_wrapper.get("second", 2) == 2
+
+        assert set(zeo_conf_wrapper.keys()) == set(used.keys())
+        assert set(zeo_conf_wrapper.values()) == set(used.values())
+
+        assert set(zeo_conf_wrapper.iterkeys()) == set(used.iterkeys())
+        assert set(zeo_conf_wrapper.itervalues()) == set(used.itervalues())
+
+        iterated = {
+            key: val
+            for key, val in zeo_conf_wrapper
+        }
+
+        assert iterated == used
+
+    with transaction.manager:
+        del zeo_conf_wrapper["first"]
+
+    with transaction.manager:
+        assert "first" not in zeo_wrapper
