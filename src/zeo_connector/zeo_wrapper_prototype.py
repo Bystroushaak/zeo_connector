@@ -139,3 +139,30 @@ class ZEOWrapperPrototype(object):
             self._on_close_callback()
 
         self._db_root[key] = val
+
+    def __contains__(self, key):
+        return key in self._db_root
+
+    def __delitem__(self, key):
+        del self._db_root[key]
+
+    def __iter__(self):
+        return self._db_root.iteritems()
+
+    def iteritems(self):
+        return self._db_root.iteritems()
+
+    def keys(self):
+        return self._db_root.keys()
+
+    def iterkeys(self):
+        return self._db_root.iterkeys()
+
+    def values(self):
+        return self._db_root.values()
+
+    def itervalues(self):
+        return self._db_root.itervalues()
+
+    def get(self, key, alt):
+        return self._db_root.get(key, alt)
