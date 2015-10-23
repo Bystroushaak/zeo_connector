@@ -152,3 +152,42 @@ Source code
 Project is released under the MIT license. Source code can be found at GitHub:
 
 - https://github.com/Bystroushaak/zeo_connector
+
+
+Unittests
+---------
+
+You can run the tests using provided ``run_tests.sh`` script, which can be found in the root of the project.
+
+If you have any trouble, just add ``--pdb`` switch at the end of your ``run_tests.sh`` command like this: ``./run_tests.sh --pdb``. This will drop you to `PDB`_ shell.
+
+.. _PDB: https://docs.python.org/2/library/pdb.html
+
+Requirements
+++++++++++++
+This script expects that package pytest_ is installed. In case you don't have it yet, it can be easily installed using following command::
+
+    pip install --user pytest
+
+or for all users::
+
+    sudo pip install pytest
+
+.. _pytest: http://pytest.org/
+
+
+Example
++++++++
+
+::
+
+    $ ./run_tests.sh 
+    ============================= test session starts ==============================
+    platform linux2 -- Python 2.7.6 -- py-1.4.30 -- pytest-2.7.2
+    rootdir: /home/bystrousak/Plocha/Dropbox/c0d3z/python/libs/zeo_connector, inifile: 
+    plugins: cov
+    collected 7 items 
+
+    tests/test_zeo_connector.py .......
+
+    =========================== 7 passed in 7.08 seconds ===========================
