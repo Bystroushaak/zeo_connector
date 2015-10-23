@@ -11,7 +11,9 @@ import transaction
 from zeo_connector import ZEOWrapper
 from zeo_connector import ZEOConfWrapper
 
-import environment_generator
+from zeo_connector_defaults import generate_environment
+from zeo_connector_defaults import cleanup_environment
+from zeo_connector_defaults import tmp_context_name
 
 
 # Variables ===================================================================
@@ -20,18 +22,18 @@ PROJECT_KEY = "some_key"
 
 # Setup =======================================================================
 def setup_module(module):
-    environment_generator.generate_environment()
+    generate_environment()
 
 
 def teardown_module(module):
-    environment_generator.cleanup_environment()
+    cleanup_environment()
 
 
 # Fixtures ====================================================================
 @pytest.fixture
 def zeo_conf_wrapper():
     return ZEOConfWrapper(
-        conf_path=environment_generator.tmp_context_name("zeo_client.conf"),
+        conf_path=tmp_context_name("zeo_client.conf"),
         project_key=PROJECT_KEY,
     )
 
