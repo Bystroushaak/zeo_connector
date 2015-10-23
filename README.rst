@@ -135,3 +135,20 @@ You should change the ``path`` properties.
 Command to run the ZEO with the server configuration file::
 
     runzeo -C zeo_server.conf
+
+Installation
+------------
+
+Module is `hosted at PYPI <https://pypi.python.org/pypi/zeo_connector>`_, and can be easily installed using `PIP`_::
+
+    sudo pip install zeo_connector
+
+.. _PIP: http://en.wikipedia.org/wiki/Pip_%28package_manager%29
+
+
+Source code
+-----------
+
+Project is released under the MIT license. Source code can be found at GitHub:
+
+- https://github.com/Bystroushaak/zeo_connector
