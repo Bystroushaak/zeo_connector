@@ -150,7 +150,18 @@ You can change the ports and address of the server using ``--server`` or ``--por
 
 To run the ZEO with the server configuration file, run the following command::
 
-    runzeo -C zeo_server.conf
+    runzeo -C zeo.conf
+
+To run the client, you may use ``ZEOConfWrapper``, as was show above:
+
+.. code-block:: python
+
+    from zeo_connector import ZEOConfWrapper
+
+    db_obj = ZEOConfWrapper(
+        conf_path="./zeo_client.conf",
+        project_key="Some project key",
+    )
 
 Installation
 ------------
@@ -168,7 +179,6 @@ Source code
 Project is released under the MIT license. Source code can be found at GitHub:
 
 - https://github.com/Bystroushaak/zeo_connector
-
 
 Unittests
 ---------
@@ -190,7 +200,6 @@ or for all users::
     sudo pip install pytest
 
 .. _pytest: http://pytest.org/
-
 
 Example
 +++++++
