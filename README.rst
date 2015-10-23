@@ -92,47 +92,63 @@ So you can retreive the data you stored into the database:
 
 Running the ZEO server
 ----------------------
-The examples expects, that the ZEO server is running. To run the ZEO, look at the help page of the ``runzeo`` script which is part of the ZEO bundle::
+The examples expects, that the ZEO server is running. To run the ZEO, look at the help page of the ``runzeo`` script which is part of the ZEO bundle. This script requires commandline or XML configuration.
 
-    Start the ZEO storage server.
+You can generate the configuration files using provided ``zeo_connector_gen_defaults.py`` script, which is part of the `zeo_connector_defaults <https://github.com/Bystroushaak/zeo_connector_defaults>` package::
 
-    Usage: /usr/local/bin/runzeo [-C URL] [-a ADDRESS] [-f FILENAME] [-h]
+    $ zeo_connector_gen_defaults.py --help
+    usage: zeo_connector_gen_defaults.py [-h] [-s SERVER] [-p PORT] [-C] [-S]
+                                         [PATH]
 
-    Options:
-    -C/--configuration URL -- configuration file or URL
-    -a/--address ADDRESS -- server address of the form PORT, HOST:PORT, or PATH
-                            (a PATH must contain at least one "/")
-    -f/--filename FILENAME -- filename for FileStorage
-    -t/--timeout TIMEOUT -- transaction timeout in seconds (default no timeout)
-    -h/--help -- print this usage message and exit
-    -m/--monitor ADDRESS -- address of monitor server ([HOST:]PORT or PATH)
-    --pid-file PATH -- relative path to output file containing this process's pid;
-                       default $(INSTANCE_HOME)/var/ZEO.pid but only if envar
-                       INSTANCE_HOME is defined
+    This program will create the default ZEO XML configuration files.
 
-    Unless -C is specified, -a and -f are required.
+    positional arguments:
+      PATH                  Path to the database on the server (used in server
+                            configuration only.
 
-Example of the server configuration file ``zeo_server.conf``::
+    optional arguments:
+      -h, --help            show this help message and exit
+      -s SERVER, --server SERVER
+                            Server url. Default: localhost
+      -p PORT, --port PORT  Port of the server. Default: 60985
+      -C, --only-client     Create only CLIENT configuration.
+      -S, --only-server     Create only SERVER configuration
+
+For example::
+
+    $ zeo_connector_gen_defaults.py /tmp
+
+will create ``zeo.conf`` file with following content:
+
+.. code-block:: xml
 
     <zeo>
       address localhost:60985
     </zeo>
 
     <filestorage>
-      path /whatever/storage.fs
+      path /tmp/storage.fs
     </filestorage>
 
     <eventlog>
       level INFO
       <logfile>
-        path /whatever/zeo.log
+        path /tmp/zeo.log
         format %(asctime)s %(message)s
       </logfile>
     </eventlog>
 
-You should change the ``path`` properties.
+and ``zeo_client.conf`` containing:
 
-Command to run the ZEO with the server configuration file::
+.. code-block:: xml
+
+    <zeoclient>
+      server localhost:60985
+    </zeoclient>
+
+You can change the ports and address of the server using ``--server`` or ``--port`` arguments.
+
+To run the ZEO with the server configuration file, run the following command::
 
     runzeo -C zeo_server.conf
 
