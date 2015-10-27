@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.0
+-----
+    - Added ``@retry_and_reset`` decorator for all internal dict-methods calls.
+    - Project key is now optional, so this object may be used to access the root of the database.
+    - Property ``ASYNCORE_RUNNING`` renamed to ``_ASYNCORE_RUNNING``.
+
 0.3.0
 -----
     - Environment generator and other shared parts moved to https://github.com/Bystroushaak/zeo_connector_defaults
