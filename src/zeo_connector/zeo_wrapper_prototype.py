@@ -13,7 +13,7 @@ from BTrees.OOBTree import OOBTree
 
 
 # Variables ===================================================================
-ASYNCORE_RUNNING = False
+_ASYNCORE_RUNNING = False
 
 
 # Functions & classes =========================================================
@@ -21,14 +21,14 @@ def _init_zeo():
     """
     Start asyncore thread.
     """
-    if not ASYNCORE_RUNNING:
+    if not _ASYNCORE_RUNNING:
         def _run_asyncore_loop():
             asyncore.loop()
 
         thread.start_new_thread(_run_asyncore_loop, ())
 
-        global ASYNCORE_RUNNING
-        ASYNCORE_RUNNING = True
+        global _ASYNCORE_RUNNING
+        _ASYNCORE_RUNNING = True
 
 
 def retry_and_reset(fn):
