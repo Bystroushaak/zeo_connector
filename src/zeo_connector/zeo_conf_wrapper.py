@@ -22,13 +22,15 @@ class ZEOConfWrapper(ZEOWrapperPrototype):
         default_type (obj): Default data object used for root, if the root
             wasn't already created in ZEO.
     """
-    def __init__(self, conf_path, project_key, run_asyncore_thread=True):
+    def __init__(self, conf_path, project_key=None, run_asyncore_thread=True):
         """
         Initialize the object.
 
         Args:
             conf_path (str): See :attr:`conf_path`.
-            project_key (str): See :attr:`project_key`.
+            project_key (str, default None): See :attr:`project_key`. If not
+                set, the root of the database is used (this may cause
+                performace issues).
             run_asyncore_thread (bool, default True): Run external asyncore
                 thread, which handles connections to database? Default True.
         """

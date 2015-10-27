@@ -118,3 +118,12 @@ def test_dict_methods(zeo_wrapper, zeo_conf_wrapper):
 
     with transaction.manager:
         assert "first" not in zeo_wrapper
+
+
+def test_root_access():
+    root = ZEOConfWrapper(
+        conf_path=tmp_context_name("zeo_client.conf"),
+    )
+
+    assert PROJECT_KEY in root
+    assert list(root.keys()) == [PROJECT_KEY]
