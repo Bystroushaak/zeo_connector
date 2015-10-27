@@ -19,7 +19,7 @@ ASYNCORE_RUNNING = False
 # Functions & classes =========================================================
 def _init_zeo():
     """
-    Start asyncore thread
+    Start asyncore thread.
     """
     if not ASYNCORE_RUNNING:
         def _run_asyncore_loop():
@@ -29,6 +29,27 @@ def _init_zeo():
 
         global ASYNCORE_RUNNING
         ASYNCORE_RUNNING = True
+
+
+def retry_and_reset(fn):
+    """
+    Decorator used to make sure, that operation on ZEO object will be retried,
+    if there is ``ConnectionStateError`` exception.
+    """
+    def retry_and_reset_decorator(*args, **kwargs):
+        obj = kwargs.get("self", None)
+
+        if not obj:
+            obj = args[0]
+
+        try:
+            return fn(*args, **kwargs)
+        except ConnectionStateError:
+            obj._on_close_callback()
+
+        return fn(*args, **kwargs)
+
+    return retry_and_reset_decorator
 
 
 class ZEOWrapperPrototype(object):
@@ -124,45 +145,46 @@ class ZEOWrapperPrototype(object):
         """
         self._connection.sync()
 
+    @retry_and_reset
     def __getitem__(self, key):
-        try:
-            return self._db_root[key]
-        except ConnectionStateError:
-            self._on_close_callback()
-
         return self._db_root[key]
 
+    @retry_and_reset
     def __setitem__(self, key, val):
-        try:
-            self._db_root[key] = val
-        except ConnectionStateError:
-            self._on_close_callback()
-
         self._db_root[key] = val
 
+    @retry_and_reset
     def __contains__(self, key):
         return key in self._db_root
 
+    @retry_and_reset
     def __delitem__(self, key):
         del self._db_root[key]
 
+    @retry_and_reset
     def __iter__(self):
         return self._db_root.iteritems()
 
+    @retry_and_reset
     def iteritems(self):
         return self._db_root.iteritems()
 
+    @retry_and_reset
     def keys(self):
         return self._db_root.keys()
 
+    @retry_and_reset
     def iterkeys(self):
         return self._db_root.iterkeys()
 
+    @retry_and_reset
     def values(self):
         return self._db_root.values()
 
+    @retry_and_reset
     def itervalues(self):
         return self._db_root.itervalues()
 
+    @retry_and_reset
     def get(self, key, alt):
         return self._db_root.get(key, alt)

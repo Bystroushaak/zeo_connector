@@ -54,7 +54,6 @@ def test_zeo_conf_wrapper_storing_and_retreiving():
 
     with transaction.manager:
         first_wrapper["something"] = "hello"
-        assert first_wrapper["something"] == "hello"
 
     with transaction.manager:
         assert second_wrapper["something"] == "hello"
