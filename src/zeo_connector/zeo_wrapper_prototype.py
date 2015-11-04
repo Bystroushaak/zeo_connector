@@ -190,3 +190,9 @@ class ZEOWrapperPrototype(object):
     @retry_and_reset
     def get(self, key, alt):
         return self._root.get(key, alt)
+
+    def pack(self):
+        """
+        Call .pack() on the database (transaction history cleanup).
+        """
+        return self._get_db().pack()

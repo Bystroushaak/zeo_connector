@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4.1
+-----
+    - Implemented ``.pack()``.
+
 0.4.0
 -----
     - Added ``@retry_and_reset`` decorator for all internal dict-methods calls.
