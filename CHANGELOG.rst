@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4.2
+-----
+    - Added ``@transaction_manager``.
+
 0.4.1
 -----
     - Implemented ``.pack()``.

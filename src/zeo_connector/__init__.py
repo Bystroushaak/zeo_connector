@@ -7,3 +7,4 @@
 from zeo_wrapper import ZEOWrapper
 from zeo_conf_wrapper import ZEOConfWrapper
 from zeo_wrapper_prototype import ZEOWrapperPrototype
+from transaction_manager import transaction_manager
