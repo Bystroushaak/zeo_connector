@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4.3
+-----
+    - Added ``examples/database_handler.py`` and tests.
+
 0.4.2
 -----
     - Added ``@transaction_manager``.

@@ -10,6 +10,7 @@ import transaction
 
 from zeo_connector import ZEOWrapper
 from zeo_connector import ZEOConfWrapper
+from zeo_connector.examples import DatabaseHandler
 
 from zeo_connector_defaults import generate_environment
 from zeo_connector_defaults import cleanup_environment
@@ -43,6 +44,14 @@ def zeo_wrapper():
     return ZEOWrapper(
         server="localhost",
         port=60985,
+        project_key=PROJECT_KEY,
+    )
+
+
+@pytest.fixture
+def database_handler():
+    return DatabaseHandler(
+        conf_path=tmp_context_name("zeo_client.conf"),
         project_key=PROJECT_KEY,
     )
 
@@ -127,3 +136,8 @@ def test_root_access():
 
     assert PROJECT_KEY in root
     assert list(root.keys()) == [PROJECT_KEY]
+
+
+def test_database_handler(database_handler):
+    with transaction.manager:
+        assert database_handler.zeo["zeo"] == "hello ZEO"
