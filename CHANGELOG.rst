@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.4.4
+-----
+    - Added @wraps(fn) to decorators.
+    - Added requirement for zope.interface.
+
 0.4.3
 -----
     - Added ``examples/database_handler.py`` and tests.
