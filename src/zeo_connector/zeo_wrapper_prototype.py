@@ -6,6 +6,7 @@
 # Imports =====================================================================
 import thread
 import asyncore
+from functools import wraps
 
 import transaction
 from ZODB.POSException import ConnectionStateError
@@ -36,6 +37,7 @@ def retry_and_reset(fn):
     Decorator used to make sure, that operation on ZEO object will be retried,
     if there is ``ConnectionStateError`` exception.
     """
+    @wraps(fn)
     def retry_and_reset_decorator(*args, **kwargs):
         obj = kwargs.get("self", None)
 
