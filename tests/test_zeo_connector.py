@@ -15,6 +15,7 @@ from zeo_connector.examples import DatabaseHandler
 from zeo_connector_defaults import generate_environment
 from zeo_connector_defaults import cleanup_environment
 from zeo_connector_defaults import tmp_context_name
+from zeo_connector_defaults.environment_generator import ZEO_PORT
 
 
 # Variables ===================================================================
@@ -43,7 +44,7 @@ def zeo_conf_wrapper():
 def zeo_wrapper():
     return ZEOWrapper(
         server="localhost",
-        port=60985,
+        port=ZEO_PORT,
         project_key=PROJECT_KEY,
     )
 
