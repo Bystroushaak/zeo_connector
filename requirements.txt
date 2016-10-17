@@ -1,4 +1,4 @@
-ZEO
+ZEO==4.1.0
 ZODB3
 zodbpickle
 zope.event

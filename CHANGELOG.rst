@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4.7
+-----
+    - Pinned older version of ZEO.
+
 0.4.6
 -----
     - Cleanup of metadata files.
