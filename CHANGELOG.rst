@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.4.5
+-----
+    - Attempt to solve https://github.com/WebArchivCZ/WA-KAT/issues/86
+
 0.4.4
 -----
     - Added @wraps(fn) to decorators.

@@ -45,4 +45,10 @@ class ZEOConfWrapper(ZEOWrapperPrototype):
         """
         Open the connection to the database based on the configuration file.
         """
+        if self._connection:
+            try:
+                self._connection.close()
+            except Exception:
+                pass
+
         return DB(storageFromFile(open(self.conf_path)))

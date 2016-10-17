@@ -106,6 +106,12 @@ class ZEOWrapperPrototype(object):
         """
         Open the connection to the database based on the configuration file.
         """
+        if self._connection:
+            try:
+                self._connection.close()
+            except Exception:
+                pass
+
         db = self._get_db()
         self._connection = db.open()
 
