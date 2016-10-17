@@ -1,32 +1,21 @@
 Changelog
 =========
 
-0.4.5
+0.4.6
 -----
-    - Attempt to solve https://github.com/WebArchivCZ/WA-KAT/issues/86
+    - Cleanup of metadata files.
 
-0.4.4
------
-    - Added @wraps(fn) to decorators.
-    - Added requirement for zope.interface.
-
-0.4.3
------
-    - Added ``examples/database_handler.py`` and tests.
-
-0.4.2
------
-    - Added ``@transaction_manager``.
-
-0.4.1
------
-    - Implemented ``.pack()``.
-
-0.4.0
------
+0.4.0 - 0.4.5
+-------------
     - Added ``@retry_and_reset`` decorator for all internal dict-methods calls.
     - Project key is now optional, so this object may be used to access the root of the database.
     - Property ``ASYNCORE_RUNNING`` renamed to ``_ASYNCORE_RUNNING``.
+    - Implemented ``.pack()``.
+    - Added ``@transaction_manager``.
+    - Added ``examples/database_handler.py`` and tests.
+    - Added @wraps(fn) to decorators.
+    - Added requirement for zope.interface.
+    - Attempt to solve https://github.com/WebArchivCZ/WA-KAT/issues/86
 
 0.3.0
 -----

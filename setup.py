@@ -62,10 +62,6 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
 
-    scripts=[
-        # 'bin/edeposit_storage_runzeo.sh',
-    ],
-
     zip_safe=False,
     include_package_data=True,
     install_requires=open("requirements.txt").read().splitlines(),
